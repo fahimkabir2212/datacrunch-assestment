@@ -8,7 +8,7 @@ export default function Hero() {
   const { headline, description, primaryCta, banner } = heroContent;
 
   return (
-    <Container as="section">
+    <Container as="section" className="mt-20">
       <div className="flex flex-col items-start gap-5">
         <div className="flex items-start flex-col gap-7.5 lg:flex-row lg:items-center">
           <h1 className="text-white font-extrabold text-5xl md:text-5xl lg:text-6xl leading-[1.1] md:leading-[1.05] lg:leading-[1.05]">
