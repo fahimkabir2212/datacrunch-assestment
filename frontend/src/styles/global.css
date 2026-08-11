@@ -21,5 +21,19 @@
   h5,
   h6 {
     font-family: var(--font-display);
+    letter-spacing: -5%;
+  }
+}
+
+@media (min-width: 64rem) {
+  .hero-banner-notch {
+    mask-image: url("/images/home/hero-banner-mask.svg");
+    -webkit-mask-image: url("/images/home/hero-banner-mask.svg");
+
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+
+    mask-size: 100% 100%;
+    -webkit-mask-size: 100% 100%;
   }
 }
