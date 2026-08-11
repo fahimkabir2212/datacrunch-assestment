@@ -4,7 +4,7 @@ export default function HeroBanner() {
       <img
         src="/images/home/hero.webp"
         alt="A diverse team smiling together, encircled by a glowing network of connected data points"
-        className="aspect-video lg:aspect-1400/571 w-full object-cover brightness-60"
+        className="aspect-video md:aspect-1400/571 w-full object-cover brightness-60"
       />
 
       <div

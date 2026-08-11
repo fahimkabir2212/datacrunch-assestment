@@ -28,8 +28,8 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="mt-8 lg:mt-20 relative flex w-full flex-col lg:items-center gap-5 lg:block">
-          <PlayButton className="relative z-10 lg:absolute lg:inset-x-0 lg:top-0 lg:z-10 lg:mx-auto lg:-translate-y-1/2" />
+        <div className="mt-8 md:mt-20 relative flex w-full flex-col gap-5 md:block">
+          <PlayButton className="relative z-10 md:absolute md:inset-x-0 md:top-0 md:mx-auto md:-translate-y-1/2" />
           <HeroBanner />
         </div>
       </div>

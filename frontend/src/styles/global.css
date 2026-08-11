@@ -25,7 +25,7 @@
   }
 }
 
-@media (min-width: 64rem) {
+@media (min-width: 48rem) {
   .hero-banner-notch {
     mask-image: url("/images/home/hero-banner-mask.svg");
     -webkit-mask-image: url("/images/home/hero-banner-mask.svg");
