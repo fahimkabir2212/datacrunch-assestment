@@ -23,6 +23,51 @@ export interface TrustedByContent {
   logos: TrustedByLogo[];
 }
 
+export interface PillarCard {
+  title: string;
+  description: string;
+}
+
+export interface SolutionsTab {
+  id: string;
+  label: string;
+  index: string;
+  heading: string;
+  description: string;
+  cta: string;
+  cards: PillarCard[];
+  /** DOM id of the section this tab should scroll to, if any — e.g.
+   *  "Custom Software" jumps to ProductShowcase, "Tech Staffing" jumps
+   *  to TechStack. Omitted for tabs whose content sits right below the
+   *  nav already (Data + AI). */
+  scrollTargetId?: string;
+}
+
+export interface SolutionsContent {
+  tabs: SolutionsTab[];
+}
+
+export interface ProductShowcaseContent {
+  logo: { src: string; alt: string };
+  heading: string;
+  description: string;
+  cta: string;
+  image: { src: string; alt: string };
+}
+
+export interface TechStackItem {
+  id: string;
+  name: string;
+  src: string;
+}
+
+export interface TechStackContent {
+  eyebrow: string;
+  heading: string;
+  description: string;
+  items: TechStackItem[];
+}
+
 export interface HeroContent {
   headline: HighlightedTextSegment[];
   description: string;
