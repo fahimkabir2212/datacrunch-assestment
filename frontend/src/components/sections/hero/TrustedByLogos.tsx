@@ -1,4 +1,5 @@
 export interface TrustedByLogo {
+  id: string;
   name: string;
   src: string;
 }
@@ -18,7 +19,7 @@ export default function TrustedByLogos({
     >
       {logos.map((logo) => (
         <div
-          key={logo.name}
+          key={logo.id}
           className="flex items-center justify-center border-r border-b border-ink-inverse-subtle px-6 py-8"
         >
           <img
