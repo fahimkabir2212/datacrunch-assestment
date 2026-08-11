@@ -1,9 +1,15 @@
-export default function HeroBanner() {
+import type { HeroContent } from "../../../types/content";
+
+interface HeroBannerProps {
+  image: HeroContent["banner"]["image"];
+}
+
+export default function HeroBanner({ image }: HeroBannerProps) {
   return (
     <div className="hero-banner-notch relative w-full overflow-hidden rounded-2xl">
       <img
-        src="/images/home/hero.webp"
-        alt="A diverse team smiling together, encircled by a glowing network of connected data points"
+        src={image.src}
+        alt={image.alt}
         className="aspect-video md:aspect-1400/571 w-full object-cover brightness-60"
       />
 
