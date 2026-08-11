@@ -4,11 +4,18 @@ export interface TrustedByLogo {
   src: string;
 }
 
-/** One run of text in a heading — either plain, or picked out with the brand color.
- *  `text` is always the field to check: empty/missing means "skip this segment". */
+/** One run of text in a heading — plain, picked out with the brand color,
+ *  bold, or both. `text` is always the field to check: empty/missing
+ *  means "skip this segment". */
 export interface HighlightedTextSegment {
   text: string;
   highlight?: boolean;
+  bold?: boolean;
+}
+
+export interface AboutContent {
+  eyebrow: string;
+  heading: HighlightedTextSegment[];
 }
 
 export interface TrustedByContent {
