@@ -1,8 +1,4 @@
-export interface TrustedByLogo {
-  id: string;
-  name: string;
-  src: string;
-}
+import type { TrustedByLogo } from "../../../types/content";
 
 interface TrustedByLogosProps {
   logos: TrustedByLogo[];

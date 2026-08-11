@@ -1,4 +1,4 @@
-import type { TrustedByLogo } from "../../components/sections/trustedBy/TrustedByLogos";
+import type { TrustedByLogo } from "../../types/content";
 
 export const trustedByLogos: TrustedByLogo[] = [
   {
