@@ -1,17 +1,3 @@
-/**
- * Design tokens.
- *
- * Tier 1 (:root) — every raw hex in the design, declared once. Outside @theme
- * on purpose, so Tailwind generates no utilities for them. Components must not
- * reference these directly.
- *
- * Tier 2 (@theme) — what a colour is *for*. These generate the utilities.
- *
- * Roles: canvas (page ground) > surface (panels) > ink (text) > line (rules),
- * plus brand. Rebranding is a tier 1 edit; re-pointing an element is a tier 2
- * edit.
- */
-
 :root {
   --green-deep: #032019;
   --green-bright: #33f987;
