@@ -6,7 +6,6 @@ export default function RootLayout() {
       <main id="main">
         <Outlet />
       </main>
-
       <ScrollRestoration />
     </>
   );
