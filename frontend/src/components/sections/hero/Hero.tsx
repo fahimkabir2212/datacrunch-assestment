@@ -1,7 +1,5 @@
 import PlayButton from "../../ui/buttons/PlayButton";
 import Container from "../../ui/Container";
-import TrustedByLogos from "./TrustedByLogos";
-import { trustedByLogos } from "../../../data/home/trustedByLogos";
 import HeroBanner from "./HeroBanner";
 
 export default function Hero() {
@@ -32,14 +30,6 @@ export default function Hero() {
           <PlayButton className="relative z-10 md:absolute md:inset-x-0 md:top-0 md:mx-auto md:-translate-y-1/2" />
           <HeroBanner />
         </div>
-      </div>
-
-      <div className="mt-20 grid grid-cols-1 lg:grid-cols-12 items-start lg:justify-between gap-7.5">
-        <h2 className="text-white text-2xl lg:text-xl col-span-4 lg:max-w-2/3">
-          <span className="text-brand">Trusted by</span> product teams and
-          enterprise <span className="text-brand">innovators.</span>
-        </h2>
-        <TrustedByLogos logos={trustedByLogos} className="col-span-8" />
       </div>
     </Container>
   );
