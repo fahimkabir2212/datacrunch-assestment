@@ -96,6 +96,43 @@ one to use for Lighthouse runs or for checking the built output.
 
 ---
 
+## Deployment (Vercel)
+
+Frontend and API deploy as a **single Vercel project**, so both share one
+origin. That means no CORS configuration and one URL.
+
+`vercel.json` drives everything:
+
+- `installCommand` — `npm run install:all`, so the backend's dependencies exist
+- `buildCommand` — `npm run build`, which compiles `backend/dist` (needed by the
+  serverless function) and `frontend/dist`
+- `outputDirectory` — `frontend/dist`, served as static assets
+- `rewrites` — sends everything except `/api/*` to `index.html`, without which
+  a refresh on any client route would 404 at the CDN before React Router runs
+
+`api/[...path].mjs` is the API. The catch-all filename keeps the original URL
+intact, so Express still receives `/api/home/hero` and the existing
+`app.use("/api", …)` mounting works unchanged. It imports the compiled
+`backend/dist/app.js` — not `index.ts`, which calls `app.listen()` and must
+never run in a serverless runtime.
+
+### Environment variables
+
+**Leave `VITE_API_BASE_URL` unset.** The client falls back to the same origin,
+which is what you want here. Setting it to a full URL would send the browser
+cross-origin and reintroduce CORS.
+
+`CORS_ORIGINS` is likewise unnecessary while both halves share an origin.
+Vercel sets `NODE_ENV=production` itself, which switches content responses to
+the cached `Cache-Control` header.
+
+### After deploying
+
+Check `/api/health` returns `{"success":true,…}`, then load the site and
+confirm the sections render rather than showing their error states.
+
+---
+
 ## API
 
 All responses share one envelope, so the client never has to guess the shape of
