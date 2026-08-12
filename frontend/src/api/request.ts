@@ -12,16 +12,40 @@ const API_PREFIX = "/api";
 
 const DEFAULT_TIMEOUT_MS = 10_000;
 
+const DEFAULT_RETRIES = 2;
+
+const RETRY_BASE_DELAY_MS = 300;
+
 export interface RequestOptions {
   signal?: AbortSignal;
-  /** Overrides the default request timeout. */
   timeoutMs?: number;
+  retries?: number;
   headers?: HeadersInit;
   cache?: RequestCache;
 }
 
 function failure(status: number, code: string, message: string): ApiFailure {
   return { success: false, status, data: null, error: { code, message } };
+}
+
+function delay(ms: number, signal?: AbortSignal): Promise<void> {
+  return new Promise((resolve, reject) => {
+    if (signal?.aborted) {
+      reject(signal.reason as Error);
+      return;
+    }
+
+    const timer = setTimeout(resolve, ms);
+
+    signal?.addEventListener(
+      "abort",
+      () => {
+        clearTimeout(timer);
+        reject(signal.reason as Error);
+      },
+      { once: true },
+    );
+  });
 }
 
 async function parse<T>(
@@ -77,39 +101,59 @@ export async function request<T>(
   {
     signal,
     timeoutMs = DEFAULT_TIMEOUT_MS,
+    retries = DEFAULT_RETRIES,
     headers,
     cache,
   }: RequestOptions = {},
 ): Promise<ApiResponse<T>> {
-  const timeout = AbortSignal.timeout(timeoutMs);
-  const combined = signal ? AbortSignal.any([signal, timeout]) : timeout;
   const url = `${BASE_URL}${API_PREFIX}${path}`;
 
-  let response: Response;
-  try {
-    response = await fetch(url, {
-      method,
-      headers: { Accept: "application/json", ...headers },
-      signal: combined,
-      ...(cache ? { cache } : {}),
-    });
-  } catch (cause) {
-    if (signal?.aborted) throw cause;
+  for (let attempt = 0; ; attempt++) {
+    // A fresh timeout per attempt — one shared budget would leave the last
+    // attempt with whatever the earlier ones did not use.
+    const timeout = AbortSignal.timeout(timeoutMs);
+    const combined = signal ? AbortSignal.any([signal, timeout]) : timeout;
 
-    if (timeout.aborted) {
+    let response: Response;
+    try {
+      response = await fetch(url, {
+        method,
+        headers: { Accept: "application/json", ...headers },
+        signal: combined,
+        ...(cache ? { cache } : {}),
+      });
+    } catch (cause) {
+      // The caller cancelled: not a failure to report, and never worth
+      // retrying.
+      if (signal?.aborted) throw cause;
+
+      // A timeout means the server answered too slowly, not that the request
+      // never landed. Retrying would multiply the wait the user already sat
+      // through, so this gives up immediately.
+      if (timeout.aborted) {
+        return failure(
+          0,
+          CLIENT_ERROR_CODES.timeout,
+          `Request to ${path} timed out after ${timeoutMs}ms.`,
+        );
+      }
+
+      // The request never reached the server — a dropped connection, a DNS
+      // blip, a backend still starting up. Worth another go.
+      if (attempt < retries) {
+        await delay(RETRY_BASE_DELAY_MS * 2 ** attempt, signal);
+        continue;
+      }
+
       return failure(
         0,
-        CLIENT_ERROR_CODES.timeout,
-        `Request to ${path} timed out after ${timeoutMs}ms.`,
+        CLIENT_ERROR_CODES.network,
+        "Could not reach the server. Check your connection and try again.",
       );
     }
 
-    return failure(
-      0,
-      CLIENT_ERROR_CODES.network,
-      "Could not reach the server. Check your connection and try again.",
-    );
+    // Any HTTP response, success or error, is an answer. Retrying a 404 or a
+    // 500 would just ask the same question again.
+    return parse<T>(response, path);
   }
-
-  return parse<T>(response, path);
 }
