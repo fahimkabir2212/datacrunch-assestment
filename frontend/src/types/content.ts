@@ -4,9 +4,6 @@ export interface TrustedByLogo {
   src: string;
 }
 
-/** One run of text in a heading — plain, picked out with the brand color,
- *  bold, or both. `text` is always the field to check: empty/missing
- *  means "skip this segment". */
 export interface HighlightedTextSegment {
   text: string;
   highlight?: boolean;
@@ -28,12 +25,9 @@ export interface PillarCard {
   description: string;
 }
 
-/** Pure in-page navigation, not a content switcher — clicking a tab
- *  scrolls to a section; it never changes what's rendered. */
 export interface SolutionsTab {
   id: string;
   label: string;
-  /** DOM id of the section this tab scrolls to. */
   scrollTargetId: string;
 }
 
@@ -81,3 +75,15 @@ export interface HeroContent {
     };
   };
 }
+
+export interface HomeContent {
+  hero: HeroContent;
+  trustedBy: TrustedByContent;
+  about: AboutContent;
+  solutions: SolutionsContent;
+  pillarDetail: PillarDetailContent;
+  productShowcase: ProductShowcaseContent;
+  techStack: TechStackContent;
+}
+
+export type SectionKey = keyof HomeContent;

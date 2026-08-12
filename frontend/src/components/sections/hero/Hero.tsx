@@ -2,10 +2,21 @@ import PlayButton from "../../ui/buttons/PlayButton";
 import Container from "../../ui/Container";
 import HighlightedText from "../../ui/HighlightedText";
 import HeroBanner from "./HeroBanner";
-import { heroContent } from "../../../data/home/heroContent";
+import HeroSkeleton from "./HeroSkeleton";
+import SectionError from "../../feedback/SectionError";
+import { useSection } from "../../../hooks/useSection";
+import { SECTION_SLUGS } from "../../../constants/sections";
 
 export default function Hero() {
-  const { headline, description, primaryCta, banner } = heroContent;
+  const { status, data, error, retry } = useSection(SECTION_SLUGS.hero);
+
+  if (status === "loading") return <HeroSkeleton />;
+
+  if (status === "error") {
+    return <SectionError label="Hero" error={error} onRetry={retry} />;
+  }
+
+  const { headline, description, primaryCta, banner } = data;
 
   return (
     <Container as="section" className="mt-20">

@@ -123,13 +123,8 @@ export async function request<T>(
         ...(cache ? { cache } : {}),
       });
     } catch (cause) {
-      // The caller cancelled: not a failure to report, and never worth
-      // retrying.
       if (signal?.aborted) throw cause;
 
-      // A timeout means the server answered too slowly, not that the request
-      // never landed. Retrying would multiply the wait the user already sat
-      // through, so this gives up immediately.
       if (timeout.aborted) {
         return failure(
           0,
@@ -138,8 +133,6 @@ export async function request<T>(
         );
       }
 
-      // The request never reached the server — a dropped connection, a DNS
-      // blip, a backend still starting up. Worth another go.
       if (attempt < retries) {
         await delay(RETRY_BASE_DELAY_MS * 2 ** attempt, signal);
         continue;
@@ -152,8 +145,6 @@ export async function request<T>(
       );
     }
 
-    // Any HTTP response, success or error, is an answer. Retrying a 404 or a
-    // 500 would just ask the same question again.
     return parse<T>(response, path);
   }
 }
