@@ -13,6 +13,7 @@ export const SECTION_SLUGS = {
 export type SectionSlug = (typeof SECTION_SLUGS)[SectionKey];
 
 export const SITE_SLUGS = {
+  header: "header",
   footer: "footer",
 } as const satisfies Record<SiteSectionKey, string>;
 

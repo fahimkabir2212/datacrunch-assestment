@@ -101,8 +101,28 @@ export interface HomeContent {
 
 export type SectionKey = keyof HomeContent;
 
-/** Chrome that wraps every route, as opposed to the content of any one page. */
+export interface MegaMenuItem {
+  id: string;
+  label: string;
+  href: string;
+  image: { src: string; alt: string };
+}
+
+export interface NavItem {
+  id: string;
+  label: string;
+  href: string;
+  menu?: MegaMenuItem[];
+}
+
+export interface HeaderContent {
+  logo: { src: string; alt: string };
+  items: NavItem[];
+  cta: { label: string; href: string };
+}
+
 export interface SiteContent {
+  header: HeaderContent;
   footer: FooterContent;
 }
 
