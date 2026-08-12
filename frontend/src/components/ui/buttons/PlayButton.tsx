@@ -26,15 +26,20 @@ export default function PlayButton({
         className="absolute inset-2 rounded-full bg-brand/50"
       />
 
-      {/* layer 3 — solid core + play triangle, static (original path/geometry, just cropped viewBox) */}
+      <span
+        aria-hidden="true"
+        className="absolute inset-4 rounded-full bg-brand"
+      />
+
       <svg
-        viewBox="20 20 60 60"
-        className="absolute inset-4"
+        viewBox="0 0 24 24"
+        width="30%"
+        height="30%"
+        className="absolute inset-x-8 inset-y-9 lg:insert-x-9 lg:inset-y-8.5"
         aria-hidden="true"
       >
-        <circle cx="50" cy="50" r="30" className="fill-brand" />
         <path
-          d="M60.5 47.4019C62.5 48.5566 62.5 51.4434 60.5 52.5981L47 60.3923C45 61.547 42.5 60.1036 42.5 57.7942L42.5 42.2058C42.5 39.8964 45 38.453 47 39.6077L60.5 47.4019Z"
+          d="M6 4v16a1 1 0 0 0 1.524 .852l13 -8a1 1 0 0 0 0 -1.704l-13 -8a1 1 0 0 0 -1.524 .852z"
           className="fill-on-brand"
         />
       </svg>
