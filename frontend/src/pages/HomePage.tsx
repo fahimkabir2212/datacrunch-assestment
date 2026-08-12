@@ -1,4 +1,4 @@
-import About from "../components/sections/About";
+import About from "../components/sections/about/About";
 import Hero from "../components/sections/hero/Hero";
 import TrustedBy from "../components/sections/trusted-by/TrustedBy";
 import SolutionsTabs from "../components/sections/solutions/tabs/SolutionsTabs";
