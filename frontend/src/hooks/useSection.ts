@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { get } from "../api/client";
 import type { ApiErrorBody } from "../api/types";
-import type { SectionSlug } from "../constants/sections";
+import type { SectionSlug, SiteSlug } from "../constants/sections";
 
 export type SectionState<T> =
   | { status: "loading"; data: null; error: null }
@@ -12,7 +12,7 @@ export type UseSectionResult<T> = SectionState<T> & { retry: () => void };
 
 const LOADING = { status: "loading", data: null, error: null } as const;
 
-export function useSection<T>(slug: SectionSlug): UseSectionResult<T> {
+function useResource<T>(path: string): UseSectionResult<T> {
   const [state, setState] = useState<SectionState<T>>(LOADING);
   const [attempt, setAttempt] = useState(0);
 
@@ -22,7 +22,7 @@ export function useSection<T>(slug: SectionSlug): UseSectionResult<T> {
 
     void (async () => {
       try {
-        const response = await get<T>(`/home/${slug}`, {
+        const response = await get<T>(path, {
           signal: controller.signal,
         });
 
@@ -54,7 +54,7 @@ export function useSection<T>(slug: SectionSlug): UseSectionResult<T> {
       active = false;
       controller.abort();
     };
-  }, [slug, attempt]);
+  }, [path, attempt]);
 
   const retry = useCallback(() => {
     setState(LOADING);
@@ -62,4 +62,14 @@ export function useSection<T>(slug: SectionSlug): UseSectionResult<T> {
   }, []);
 
   return { ...state, retry };
+}
+
+/** A section of the home page. */
+export function useSection<T>(slug: SectionSlug): UseSectionResult<T> {
+  return useResource<T>(`/home/${slug}`);
+}
+
+/** A piece of chrome shared by every route. */
+export function useSiteSection<T>(slug: SiteSlug): UseSectionResult<T> {
+  return useResource<T>(`/site/${slug}`);
 }

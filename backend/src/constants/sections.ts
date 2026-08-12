@@ -8,7 +8,6 @@ export enum SectionSlug {
   PillarDetail = "pillar-detail",
   ProductShowcase = "product-showcase",
   TechStack = "tech-stack",
-  Footer = "footer",
 }
 
 export const SECTION_KEY_BY_SLUG = {
@@ -19,7 +18,6 @@ export const SECTION_KEY_BY_SLUG = {
   [SectionSlug.PillarDetail]: "pillarDetail",
   [SectionSlug.ProductShowcase]: "productShowcase",
   [SectionSlug.TechStack]: "techStack",
-  [SectionSlug.Footer]: "footer",
 } as const satisfies Record<SectionSlug, SectionKey>;
 
 /** The content key a given slug resolves to. */

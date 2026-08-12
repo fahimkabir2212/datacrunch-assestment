@@ -99,7 +99,17 @@ export interface HomeContent {
   pillarDetail: PillarDetailContent;
   productShowcase: ProductShowcaseContent;
   techStack: TechStackContent;
-  footer: FooterContent;
 }
 
 export type SectionKey = keyof HomeContent;
+
+/**
+ * Chrome that wraps every route, as opposed to the content of any one page.
+ * Kept separate from HomeContent so a 404 does not have to ask for "home"
+ * content to draw its own footer.
+ */
+export interface SiteContent {
+  footer: FooterContent;
+}
+
+export type SiteSectionKey = keyof SiteContent;

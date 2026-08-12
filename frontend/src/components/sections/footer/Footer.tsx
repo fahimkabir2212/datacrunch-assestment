@@ -4,13 +4,13 @@ import FooterLinks from "./FooterLinks";
 import FooterWordmark from "./FooterWordmark";
 import FooterSkeleton from "./FooterSkeleton";
 import SectionError from "../../feedback/SectionError";
-import { useSection } from "../../../hooks/useSection";
-import { SECTION_SLUGS } from "../../../constants/sections";
+import { useSiteSection } from "../../../hooks/useSection";
+import { SITE_SLUGS } from "../../../constants/sections";
 import type { FooterContent } from "../../../types/content";
 
 export default function Footer() {
-  const { status, data, error, retry } = useSection<FooterContent>(
-    SECTION_SLUGS.footer,
+  const { status, data, error, retry } = useSiteSection<FooterContent>(
+    SITE_SLUGS.footer,
   );
 
   if (status === "loading") return <FooterSkeleton />;
@@ -23,7 +23,7 @@ export default function Footer() {
     );
   }
 
-  console.log("Footer data:", data);
+  // console.log("Footer data:", data);
 
   const { copyright, legalLinks, socialLinks, wordmark } = data;
 

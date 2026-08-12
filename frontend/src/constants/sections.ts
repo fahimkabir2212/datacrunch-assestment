@@ -1,4 +1,4 @@
-import type { SectionKey } from "../types/content";
+import type { SectionKey, SiteSectionKey } from "../types/content";
 
 export const SECTION_SLUGS = {
   hero: "hero",
@@ -8,7 +8,12 @@ export const SECTION_SLUGS = {
   pillarDetail: "pillar-detail",
   productShowcase: "product-showcase",
   techStack: "tech-stack",
-  footer: "footer",
 } as const satisfies Record<SectionKey, string>;
 
 export type SectionSlug = (typeof SECTION_SLUGS)[SectionKey];
+
+export const SITE_SLUGS = {
+  footer: "footer",
+} as const satisfies Record<SiteSectionKey, string>;
+
+export type SiteSlug = (typeof SITE_SLUGS)[SiteSectionKey];

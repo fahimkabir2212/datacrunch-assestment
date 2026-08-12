@@ -97,7 +97,13 @@ export interface HomeContent {
   pillarDetail: PillarDetailContent;
   productShowcase: ProductShowcaseContent;
   techStack: TechStackContent;
-  footer: FooterContent;
 }
 
 export type SectionKey = keyof HomeContent;
+
+/** Chrome that wraps every route, as opposed to the content of any one page. */
+export interface SiteContent {
+  footer: FooterContent;
+}
+
+export type SiteSectionKey = keyof SiteContent;
