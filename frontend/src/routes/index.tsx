@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router";
 import RootLayout from "../layouts/RootLayout";
 import HomePage from "../pages/HomePage";
+import NotFoundPage from "../pages/NotFoundPage";
 
 export const router = createBrowserRouter([
   {
@@ -9,7 +10,7 @@ export const router = createBrowserRouter([
     errorElement: <div>Routing error page</div>,
     children: [
       { index: true, element: <HomePage /> },
-      { path: "*", element: <div>NotFoundPage</div> },
+      { path: "*", element: <NotFoundPage /> },
     ],
   },
 ]);
