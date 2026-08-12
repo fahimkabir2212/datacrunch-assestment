@@ -28,7 +28,6 @@ export interface PillarCard {
 export interface SolutionsTab {
   id: string;
   label: string;
-  /** DOM id of the section this tab scrolls to. */
   scrollTargetId: string;
 }
 
@@ -87,7 +86,6 @@ export interface FooterContent {
   copyright: HighlightedTextSegment[];
   legalLinks: FooterLink[];
   socialLinks: FooterLink[];
-  /** Oversized brand lockup rendered across the bottom of the page. */
   wordmark: { src: string; alt: string };
 }
 
@@ -103,12 +101,28 @@ export interface HomeContent {
 
 export type SectionKey = keyof HomeContent;
 
-/**
- * Chrome that wraps every route, as opposed to the content of any one page.
- * Kept separate from HomeContent so a 404 does not have to ask for "home"
- * content to draw its own footer.
- */
+export interface MegaMenuItem {
+  id: string;
+  label: string;
+  href: string;
+  image: { src: string; alt: string };
+}
+
+export interface NavItem {
+  id: string;
+  label: string;
+  href: string;
+  menu?: MegaMenuItem[];
+}
+
+export interface HeaderContent {
+  logo: { src: string; alt: string };
+  items: NavItem[];
+  cta: { label: string; href: string };
+}
+
 export interface SiteContent {
+  header: HeaderContent;
   footer: FooterContent;
 }
 

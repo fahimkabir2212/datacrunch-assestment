@@ -1,6 +1,49 @@
 import type { SiteContent } from "../types/content.js";
 
 export const siteContent: SiteContent = {
+  header: {
+    logo: { src: "/logo.svg", alt: "MetaTech" },
+    items: [
+      {
+        id: "solutions",
+        label: "Solutions",
+        href: "#pillar-detail",
+        menu: [
+          {
+            id: "custom-software",
+            label: "Custom Software Development",
+            href: "#product-showcase",
+            image: {
+              src: "/images/home/products/amlcredible-ui.webp",
+              alt: "A laptop displaying a custom software dashboard",
+            },
+          },
+          {
+            id: "data-ai",
+            label: "Data+AI First Innovation",
+            href: "#pillar-detail",
+            image: {
+              src: "/images/home/hero.webp",
+              alt: "A network of connected data points spanning a world map",
+            },
+          },
+          {
+            id: "tech-staffing",
+            label: "Tech Staff Augmentation",
+            href: "#tech-stack",
+            image: {
+              src: "/images/home/hero.webp",
+              alt: "Engineers connected across a distributed network",
+            },
+          },
+        ],
+      },
+      { id: "showcase", label: "Showcase", href: "#product-showcase" },
+      { id: "contact", label: "Contact", href: "#contact" },
+    ],
+    cta: { label: "Book a meeting", href: "#contact" },
+  },
+
   footer: {
     copyright: [
       { text: "@2022-2026" },
