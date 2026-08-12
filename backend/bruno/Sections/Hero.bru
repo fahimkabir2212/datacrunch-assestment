@@ -12,9 +12,12 @@ get {
 
 assert {
   res.status: eq 200
-  res.body.headline: isArray
-  res.body.description: isString
-  res.body.primaryCta: isString
+  res.body.success: eq true
+  res.body.status: eq 200
+  res.body.error: isNull
+  res.body.data.headline: isArray
+  res.body.data.description: isString
+  res.body.data.primaryCta: isString
 }
 
 docs {
@@ -24,6 +27,6 @@ docs {
 
   Headline segments, supporting copy, the primary CTA label, and the banner image. The headline is an array of segments rather than a string so the brand-coloured words can be marked up per run and wrap differently across breakpoints.
 
-  Returns the section payload directly, unwrapped — so the client type is just
-  the section interface, with no envelope to peel off.
+  The section payload arrives under `data`; see the collection docs for the
+  response envelope.
 }

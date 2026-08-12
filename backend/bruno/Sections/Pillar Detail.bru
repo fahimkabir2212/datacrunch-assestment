@@ -12,9 +12,12 @@ get {
 
 assert {
   res.status: eq 200
-  res.body.index: isString
-  res.body.cards: isArray
-  res.body.cards: length 3
+  res.body.success: eq true
+  res.body.status: eq 200
+  res.body.error: isNull
+  res.body.data.index: isString
+  res.body.data.cards: isArray
+  res.body.data.cards: length 3
 }
 
 docs {
@@ -24,6 +27,6 @@ docs {
 
   The numbered pillar block and its three supporting cards.
 
-  Returns the section payload directly, unwrapped — so the client type is just
-  the section interface, with no envelope to peel off.
+  The section payload arrives under `data`; see the collection docs for the
+  response envelope.
 }

@@ -12,6 +12,9 @@ get {
 
 assert {
   res.status: eq 404
+  res.body.success: eq false
+  res.body.status: eq 404
+  res.body.data: isNull
   res.body.error.code: eq ROUTE_NOT_FOUND
 }
 

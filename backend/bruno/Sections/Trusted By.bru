@@ -12,9 +12,12 @@ get {
 
 assert {
   res.status: eq 200
-  res.body.heading: isArray
-  res.body.logos: isArray
-  res.body.logos: length 8
+  res.body.success: eq true
+  res.body.status: eq 200
+  res.body.error: isNull
+  res.body.data.heading: isArray
+  res.body.data.logos: isArray
+  res.body.data.logos: length 8
 }
 
 docs {
@@ -24,6 +27,6 @@ docs {
 
   Client logo wall. Eight entries; Alteryx and UiPath each appear twice, which is why every logo carries an explicit `id` rather than being keyed by name.
 
-  Returns the section payload directly, unwrapped — so the client type is just
-  the section interface, with no envelope to peel off.
+  The section payload arrives under `data`; see the collection docs for the
+  response envelope.
 }

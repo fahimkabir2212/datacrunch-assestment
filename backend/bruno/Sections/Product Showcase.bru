@@ -12,9 +12,12 @@ get {
 
 assert {
   res.status: eq 200
-  res.body.heading: isString
-  res.body.logo: isDefined
-  res.body.image: isDefined
+  res.body.success: eq true
+  res.body.status: eq 200
+  res.body.error: isNull
+  res.body.data.heading: isString
+  res.body.data.logo: isDefined
+  res.body.data.image: isDefined
 }
 
 docs {
@@ -24,6 +27,6 @@ docs {
 
   The AmICredible product band — brand logo, copy, CTA, and product screenshot.
 
-  Returns the section payload directly, unwrapped — so the client type is just
-  the section interface, with no envelope to peel off.
+  The section payload arrives under `data`; see the collection docs for the
+  response envelope.
 }

@@ -12,8 +12,11 @@ get {
 
 assert {
   res.status: eq 200
-  res.body.status: eq ok
-  res.body.uptime: isNumber
+  res.body.success: eq true
+  res.body.status: eq 200
+  res.body.error: isNull
+  res.body.data.status: eq ok
+  res.body.data.uptime: isNumber
 }
 
 docs {

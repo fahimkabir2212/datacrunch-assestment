@@ -12,8 +12,11 @@ get {
 
 assert {
   res.status: eq 200
-  res.body.items: isArray
-  res.body.items: length 18
+  res.body.success: eq true
+  res.body.status: eq 200
+  res.body.error: isNull
+  res.body.data.items: isArray
+  res.body.data.items: length 18
 }
 
 docs {
@@ -23,6 +26,6 @@ docs {
 
   Eighteen technology logos rendered as scrolling marquee rows, plus the section heading and description.
 
-  Returns the section payload directly, unwrapped — so the client type is just
-  the section interface, with no envelope to peel off.
+  The section payload arrives under `data`; see the collection docs for the
+  response envelope.
 }

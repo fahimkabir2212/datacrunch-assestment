@@ -12,8 +12,11 @@ get {
 
 assert {
   res.status: eq 200
-  res.body.eyebrow: isString
-  res.body.heading: isArray
+  res.body.success: eq true
+  res.body.status: eq 200
+  res.body.error: isNull
+  res.body.data.eyebrow: isString
+  res.body.data.heading: isArray
 }
 
 docs {
@@ -23,6 +26,6 @@ docs {
 
   The short positioning statement. The heading uses the same segment array as the hero so the bold lead-in and the regular remainder can be styled independently.
 
-  Returns the section payload directly, unwrapped — so the client type is just
-  the section interface, with no envelope to peel off.
+  The section payload arrives under `data`; see the collection docs for the
+  response envelope.
 }
