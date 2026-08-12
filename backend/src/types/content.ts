@@ -77,6 +77,20 @@ export interface HeroContent {
   };
 }
 
+export interface FooterLink {
+  id: string;
+  label: string;
+  href: string;
+}
+
+export interface FooterContent {
+  copyright: HighlightedTextSegment[];
+  legalLinks: FooterLink[];
+  socialLinks: FooterLink[];
+  /** Oversized brand lockup rendered across the bottom of the page. */
+  wordmark: { src: string; alt: string };
+}
+
 export interface HomeContent {
   hero: HeroContent;
   trustedBy: TrustedByContent;
@@ -85,6 +99,7 @@ export interface HomeContent {
   pillarDetail: PillarDetailContent;
   productShowcase: ProductShowcaseContent;
   techStack: TechStackContent;
+  footer: FooterContent;
 }
 
 export type SectionKey = keyof HomeContent;

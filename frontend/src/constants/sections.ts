@@ -8,6 +8,7 @@ export const SECTION_SLUGS = {
   pillarDetail: "pillar-detail",
   productShowcase: "product-showcase",
   techStack: "tech-stack",
+  footer: "footer",
 } as const satisfies Record<SectionKey, string>;
 
 export type SectionSlug = (typeof SECTION_SLUGS)[SectionKey];

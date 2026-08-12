@@ -76,6 +76,19 @@ export interface HeroContent {
   };
 }
 
+export interface FooterLink {
+  id: string;
+  label: string;
+  href: string;
+}
+
+export interface FooterContent {
+  copyright: HighlightedTextSegment[];
+  legalLinks: FooterLink[];
+  socialLinks: FooterLink[];
+  wordmark: { src: string; alt: string };
+}
+
 export interface HomeContent {
   hero: HeroContent;
   trustedBy: TrustedByContent;
@@ -84,6 +97,7 @@ export interface HomeContent {
   pillarDetail: PillarDetailContent;
   productShowcase: ProductShowcaseContent;
   techStack: TechStackContent;
+  footer: FooterContent;
 }
 
 export type SectionKey = keyof HomeContent;
