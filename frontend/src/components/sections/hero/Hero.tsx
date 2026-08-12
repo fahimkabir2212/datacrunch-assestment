@@ -6,9 +6,12 @@ import HeroSkeleton from "./HeroSkeleton";
 import SectionError from "../../feedback/SectionError";
 import { useSection } from "../../../hooks/useSection";
 import { SECTION_SLUGS } from "../../../constants/sections";
+import type { HeroContent } from "../../../types/content";
 
 export default function Hero() {
-  const { status, data, error, retry } = useSection(SECTION_SLUGS.hero);
+  const { status, data, error, retry } = useSection<HeroContent>(
+    SECTION_SLUGS.hero,
+  );
 
   if (status === "loading") return <HeroSkeleton />;
 

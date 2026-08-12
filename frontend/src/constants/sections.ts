@@ -9,3 +9,5 @@ export const SECTION_SLUGS = {
   productShowcase: "product-showcase",
   techStack: "tech-stack",
 } as const satisfies Record<SectionKey, string>;
+
+export type SectionSlug = (typeof SECTION_SLUGS)[SectionKey];

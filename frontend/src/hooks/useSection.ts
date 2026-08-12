@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { get } from "../api/client";
 import type { ApiErrorBody } from "../api/types";
-import type { HomeContent, SectionKey } from "../types/content";
-import { SECTION_SLUGS } from "../constants/sections";
+import type { SectionSlug } from "../constants/sections";
 
 export type SectionState<T> =
   | { status: "loading"; data: null; error: null }
@@ -13,10 +12,8 @@ export type UseSectionResult<T> = SectionState<T> & { retry: () => void };
 
 const LOADING = { status: "loading", data: null, error: null } as const;
 
-export function useSection<K extends SectionKey>(
-  key: K,
-): UseSectionResult<HomeContent[K]> {
-  const [state, setState] = useState<SectionState<HomeContent[K]>>(LOADING);
+export function useSection<T>(slug: SectionSlug): UseSectionResult<T> {
+  const [state, setState] = useState<SectionState<T>>(LOADING);
   const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
@@ -25,12 +22,9 @@ export function useSection<K extends SectionKey>(
 
     void (async () => {
       try {
-        const response = await get<HomeContent[K]>(
-          `/home/${SECTION_SLUGS[key]}`,
-          {
-            signal: controller.signal,
-          },
-        );
+        const response = await get<T>(`/home/${slug}`, {
+          signal: controller.signal,
+        });
 
         if (!active) return;
 
@@ -60,7 +54,7 @@ export function useSection<K extends SectionKey>(
       active = false;
       controller.abort();
     };
-  }, [key, attempt]);
+  }, [slug, attempt]);
 
   const retry = useCallback(() => {
     setState(LOADING);
