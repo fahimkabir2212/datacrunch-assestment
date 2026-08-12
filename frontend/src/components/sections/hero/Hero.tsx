@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from "../../ui/buttons/Button";
 import PlayButton from "../../ui/buttons/PlayButton";
 import Container from "../../ui/Container";
 import HighlightedText from "../../ui/HighlightedText";
@@ -36,12 +37,7 @@ export default function Hero() {
             <p className="font-light text-sm text-white/80 md:text-base">
               {description}
             </p>
-            <button
-              type="button"
-              className="mt-6 bg-brand font-bold text-ink py-3 px-4 rounded-lg hover:bg-brand-hover cursor-pointer"
-            >
-              {primaryCta}
-            </button>
+            <Button className="mt-6">{primaryCta}</Button>
           </div>
         </div>
 

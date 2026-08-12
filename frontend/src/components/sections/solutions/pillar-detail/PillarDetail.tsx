@@ -1,4 +1,5 @@
 import Container from "../../../ui/Container";
+import Button from "../../../ui/buttons/Button";
 import PillarCard from "./PillarCard";
 import PillarDetailSkeleton from "./PillarDetailSkeleton";
 import SectionError from "../../../feedback/SectionError";
@@ -38,12 +39,9 @@ export default function PillarDetail() {
         <div>
           <h3 className="text-2xl font-bold text-ink md:text-3xl">{heading}</h3>
           <p className="mt-4 text-ink">{description}</p>
-          <button
-            type="button"
-            className="mt-6 rounded-lg bg-surface-emphasis px-4 py-3 font-bold text-ink-inverse"
-          >
+          <Button variant="emphasis" className="mt-6">
             {cta}
-          </button>
+          </Button>
         </div>
       </Container>
 

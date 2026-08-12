@@ -1,4 +1,5 @@
 import Container from "../ui/Container";
+import Button from "../ui/buttons/Button";
 import { CLIENT_ERROR_CODES } from "../../api/types";
 import type { ApiErrorBody } from "../../api/types";
 
@@ -43,13 +44,7 @@ export default function SectionError({
         <p className={onDark ? "text-ink-inverse" : "text-ink"}>
           <span className="font-bold">{label}</span> — {describe(error)}
         </p>
-        <button
-          type="button"
-          onClick={onRetry}
-          className="cursor-pointer rounded-lg bg-brand px-4 py-2 font-bold text-on-brand"
-        >
-          Try again
-        </button>
+        <Button onClick={onRetry}>Try again</Button>
       </div>
     </Container>
   );

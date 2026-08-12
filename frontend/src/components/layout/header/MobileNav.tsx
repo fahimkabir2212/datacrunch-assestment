@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from "../../ui/buttons/Button";
 import type { HeaderContent } from "../../../types/content";
 
 interface MobileNavProps {
@@ -67,13 +68,14 @@ export default function MobileNav({ header, onNavigate }: MobileNavProps) {
         })}
       </ul>
 
-      <a
+      <Button
+        as="anchor"
         href={header.cta.href}
         onClick={onNavigate}
-        className="mt-3 block rounded-xl bg-brand px-5 py-3 text-center font-bold text-on-brand"
+        className="mt-3 w-full"
       >
         {header.cta.label}
-      </a>
+      </Button>
     </nav>
   );
 }

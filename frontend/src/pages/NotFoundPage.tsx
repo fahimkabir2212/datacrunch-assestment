@@ -1,5 +1,5 @@
-import { Link } from "react-router";
 import Container from "../components/ui/Container";
+import Button from "../components/ui/buttons/Button";
 
 export default function NotFoundPage() {
   return (
@@ -29,12 +29,9 @@ export default function NotFoundPage() {
           Everything else is still where you left it.
         </p>
 
-        <Link
-          to="/"
-          className="mt-1 rounded-lg bg-brand px-4 py-3 font-bold text-on-brand transition-opacity hover:opacity-90"
-        >
+        <Button as="link" to="/" className="mt-1">
           Back to home
-        </Link>
+        </Button>
       </Container>
     </main>
   );

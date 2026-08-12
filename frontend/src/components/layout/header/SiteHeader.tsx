@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Container from "../../ui/Container";
+import Button from "../../ui/buttons/Button";
 import MegaMenu from "./MegaMenu";
 import MobileNav from "./MobileNav";
 import HeaderSkeleton from "./HeaderSkeleton";
@@ -149,12 +150,18 @@ export default function SiteHeader() {
                     })}
                   </nav>
 
-                  <a
-                    href={header.cta.href}
-                    className="hidden rounded-xl bg-ink-inverse/15 px-5 py-3 text-sm font-bold text-ink-inverse transition-colors hover:bg-ink-inverse/25 md:inline-flex"
-                  >
-                    {header.cta.label}
-                  </a>
+                  {/* Wrapper owns the responsive display so it cannot collide
+                      with the button's own `inline-flex`. */}
+                  <div className="hidden md:block">
+                    <Button
+                      as="anchor"
+                      href={header.cta.href}
+                      variant="inverse"
+                      className="text-sm"
+                    >
+                      {header.cta.label}
+                    </Button>
+                  </div>
 
                   <button
                     type="button"

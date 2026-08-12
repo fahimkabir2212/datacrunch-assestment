@@ -1,4 +1,6 @@
 import Container from "../../../ui/Container";
+import Button from "../../../ui/buttons/Button";
+import ArrowRightIcon from "../../../ui/icons/ArrowRightIcon";
 import ProductShowcaseSkeleton from "./ProductShowcaseSkeleton";
 import SectionError from "../../../feedback/SectionError";
 import { useSection } from "../../../../hooks/useSection";
@@ -39,12 +41,13 @@ export default function ProductShowcase() {
             <p className="mt-3 text-sm text-ink-inverse md:text-lg">
               {description}
             </p>
-            <button
-              type="button"
-              className="mt-6 inline-flex items-center gap-2 rounded-full border border-ink-inverse px-5 py-2.5 font-bold text-ink-inverse"
+            <Button
+              variant="outline"
+              icon={<ArrowRightIcon />}
+              className="mt-6"
             >
               {cta}
-            </button>
+            </Button>
           </div>
         </div>
 

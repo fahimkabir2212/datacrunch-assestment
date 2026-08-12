@@ -1,5 +1,6 @@
-import { Link, isRouteErrorResponse, useRouteError } from "react-router";
+import { isRouteErrorResponse, useRouteError } from "react-router";
 import Container from "../components/ui/Container";
+import Button from "../components/ui/buttons/Button";
 
 function statusOf(error: unknown): number | null {
   return isRouteErrorResponse(error) ? error.status : null;
@@ -51,20 +52,11 @@ export default function RouteErrorPage() {
         </p>
 
         <div className="mt-1 flex flex-wrap items-center gap-3">
-          <button
-            type="button"
-            onClick={() => window.location.reload()}
-            className="cursor-pointer rounded-lg bg-brand px-4 py-3 font-bold text-on-brand transition-opacity hover:opacity-90"
-          >
-            Reload page
-          </button>
+          <Button onClick={() => window.location.reload()}>Reload page</Button>
 
-          <Link
-            to="/"
-            className="rounded-lg border border-ink-inverse-subtle px-4 py-3 font-bold text-ink-inverse transition-opacity hover:opacity-90"
-          >
+          <Button as="link" to="/" variant="outline">
             Back to home
-          </Link>
+          </Button>
         </div>
 
         {import.meta.env.DEV && (
