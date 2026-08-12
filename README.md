@@ -3,6 +3,7 @@
 A responsive marketing site built from the provided Figma design, with all page
 content served from a REST API rather than hardcoded in the components.
 
+- **Live preview** — https://datacrunch.fahimkabir.dev/
 - **Frontend** — React 19 + TypeScript + Vite + Tailwind CSS v4
 - **Backend** — Node.js + Express 5 + TypeScript, serving static JSON content
 
@@ -104,8 +105,8 @@ origin. That means no CORS configuration and one URL.
 `vercel.json` declares the two halves as services and routes between them:
 
 - `services.frontend` — root `frontend`, built with the Vite preset
-- `services.backend` — root `backend`, built with `npm run build` and served
-  with `npm start`; the port comes from `process.env.PORT`, which `config/env.ts`
+- `services.backend` — root `backend`, using `src/index.ts` as the service
+  entrypoint; the port comes from `process.env.PORT`, which `config/env.ts`
   already reads
 - `rewrites` — `/api/*` goes to the backend service, everything else to the
   frontend
@@ -275,4 +276,3 @@ and animations are gated behind `motion-safe` / `motion-reduce`.
 - **Tests.** React Testing Library around the mega menu's open/close behaviour
   and the API client's retry and timeout paths would cover the parts most likely
   to regress.
-

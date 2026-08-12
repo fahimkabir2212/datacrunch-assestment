@@ -21,7 +21,7 @@
   h5,
   h6 {
     font-family: var(--font-display);
-    letter-spacing: -5%;
+    letter-spacing: -0.05em;
   }
 }
 
