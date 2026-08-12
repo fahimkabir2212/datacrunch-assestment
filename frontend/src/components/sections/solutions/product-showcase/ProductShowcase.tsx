@@ -21,7 +21,10 @@ export default function ProductShowcase() {
   const { logo, heading, description, cta, image } = data;
 
   return (
-    <section id="product-showcase" className="scroll-mt-24 bg-surface-brand">
+    <section
+      id="product-showcase"
+      className="grain scroll-mt-24 bg-surface-brand"
+    >
       <Container className="grid grid-cols-1 gap-8 py-16 md:grid-cols-2 md:gap-16">
         <div className="flex flex-col justify-between gap-16">
           <img
