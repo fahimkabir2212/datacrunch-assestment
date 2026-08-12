@@ -56,19 +56,6 @@ export default function VideoModal({ open, onClose, video }: VideoModalProps) {
       className="m-auto w-[min(64rem,92vw)] bg-transparent p-0 backdrop:bg-black/80 backdrop:backdrop-blur-sm open:animate-modal-in backdrop:open:animate-fade-in"
     >
       <div className="overflow-hidden rounded-2xl border border-ink-inverse/10 bg-surface-emphasis">
-        <div className="flex items-center justify-between gap-4 px-5 py-3">
-          <p className="text-sm font-bold text-ink-inverse">{video.title}</p>
-
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Close video"
-            className="cursor-pointer rounded-lg px-2 py-1 text-xl leading-none text-ink-inverse transition-colors hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
-          >
-            <span aria-hidden="true">✕</span>
-          </button>
-        </div>
-
         {open && (
           <iframe
             src={embedUrl(video)}
