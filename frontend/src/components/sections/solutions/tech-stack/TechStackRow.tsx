@@ -41,6 +41,8 @@ export default function TechStackRow({
               <img
                 src={item.src}
                 alt={item.name}
+                loading="lazy"
+                decoding="async"
                 className="h-10 md:h-16 aspect-video w-auto object-contain"
               />
             </div>

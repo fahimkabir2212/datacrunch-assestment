@@ -10,6 +10,11 @@ export default function HeroBanner({ image }: HeroBannerProps) {
       <img
         src={image.src}
         alt={image.alt}
+        width={626}
+        height={351}
+        loading="eager"
+        fetchPriority="high"
+        decoding="async"
         className="aspect-video md:aspect-1400/571 w-full object-cover brightness-60"
       />
 
@@ -22,6 +27,10 @@ export default function HeroBanner({ image }: HeroBannerProps) {
         src="/logo.svg"
         alt=""
         aria-hidden="true"
+        width={155}
+        height={25}
+        loading="lazy"
+        decoding="async"
         className="absolute inset-x-0 bottom-0 mx-auto w-3/4 opacity-30 brightness-0 invert"
       />
     </div>

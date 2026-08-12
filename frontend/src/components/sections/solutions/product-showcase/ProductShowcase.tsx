@@ -22,7 +22,15 @@ export default function ProductShowcase() {
     <section id="product-showcase" className="scroll-mt-24 bg-surface-brand">
       <Container className="grid grid-cols-1 gap-8 py-16 md:grid-cols-2 md:gap-16">
         <div className="flex flex-col justify-between gap-16">
-          <img src={logo.src} alt={logo.alt} className="w-48 md:w-56" />
+          <img
+            src={logo.src}
+            alt={logo.alt}
+            width={697}
+            height={100}
+            loading="lazy"
+            decoding="async"
+            className="w-48 md:w-56"
+          />
 
           <div>
             <h3 className="max-w-lg text-3xl font-bold text-ink-inverse md:text-5xl">
@@ -43,6 +51,10 @@ export default function ProductShowcase() {
         <img
           src={image.src}
           alt={image.alt}
+          width={4000}
+          height={2700}
+          loading="lazy"
+          decoding="async"
           className="aspect-square w-full rounded-2xl object-cover"
         />
       </Container>

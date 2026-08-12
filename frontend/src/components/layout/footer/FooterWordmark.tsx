@@ -10,7 +10,11 @@ export default function FooterWordmark({ src, alt }: FooterWordmarkProps) {
     <img
       src={src}
       alt={alt}
-      className="mt-10  w-full"
+      width={155}
+      height={25}
+      loading="lazy"
+      decoding="async"
+      className="mt-10 w-full"
       style={{ maskImage: FADE, WebkitMaskImage: FADE }}
     />
   );

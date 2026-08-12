@@ -21,6 +21,8 @@ export default function TrustedByLogos({
           <img
             src={logo.src}
             alt={logo.name}
+            loading="lazy"
+            decoding="async"
             className="h-10 w-auto object-contain md:h-7"
           />
         </div>
