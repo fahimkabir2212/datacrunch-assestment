@@ -38,10 +38,10 @@ export default function ProductShowcase() {
           />
 
           <div>
-            <h3 className="max-w-lg text-3xl font-bold text-ink-inverse md:text-5xl">
+            <h3 className="max-w-lg text-3xl font-bold text-ink-inverse md:text-3xl lg:text-5xl">
               {heading}
             </h3>
-            <p className="mt-3 text-sm text-ink-inverse md:text-lg">
+            <p className="mt-3 text-sm text-ink-inverse lg:text-lg">
               {description}
             </p>
             <Button
