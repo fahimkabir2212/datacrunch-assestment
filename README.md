@@ -203,6 +203,4 @@ and animations are gated behind `motion-safe` / `motion-reduce`.
 - **Tests.** React Testing Library around the mega menu's open/close behaviour
   and the API client's retry and timeout paths would cover the parts most likely
   to regress.
-- **Image performance.** Section images need explicit dimensions and
-  `loading="lazy"` to remove layout shift, and the tech marquee repeats its row
-  more times than the loop requires.
+
