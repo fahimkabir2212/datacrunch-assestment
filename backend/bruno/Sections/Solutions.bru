@@ -1,0 +1,28 @@
+meta {
+  name: Solutions
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{baseUrl}}/api/home/solutions
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 200
+  res.body.tabs: isArray
+  res.body.tabs: length 3
+}
+
+docs {
+  # Solutions
+
+  `GET /api/home/solutions` → the `solutions` slice of `HomeContent`.
+
+  The three solution tabs. Each carries a `scrollTargetId` naming the DOM id it jumps to — these are in-page navigation, not a content switcher.
+
+  Returns the section payload directly, unwrapped — so the client type is just
+  the section interface, with no envelope to peel off.
+}

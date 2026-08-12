@@ -1,0 +1,63 @@
+headers {
+  Accept: application/json
+}
+
+docs {
+  # MetaTech API
+
+  Serves the MetaTech marketing page content, one endpoint per section.
+
+  ## Running it
+
+  ```bash
+  npm run dev --prefix backend     # http://localhost:5000
+  ```
+
+  Select the **Local** environment before sending requests — every URL uses
+  `{{baseUrl}}`.
+
+  ## Endpoints
+
+  | Method | Path                          |
+  |--------|-------------------------------|
+  | GET    | `/api/health`                 |
+  | GET    | `/api/home/hero`              |
+  | GET    | `/api/home/trusted-by`        |
+  | GET    | `/api/home/about`             |
+  | GET    | `/api/home/solutions`         |
+  | GET    | `/api/home/pillar-detail`     |
+  | GET    | `/api/home/product-showcase`  |
+  | GET    | `/api/home/tech-stack`        |
+
+  Each section is fetched independently, so a slow or failing section costs the
+  visitor that section rather than the whole page.
+
+  ## Conventions
+
+  - Every endpoint is `GET`. The API is read-only; nothing here mutates state.
+  - Successful responses return the section payload directly, unwrapped — the
+    client type is just the section interface, with no envelope to peel off.
+  - Every failure returns the same shape, so clients branch on `code` rather
+    than parsing messages:
+
+    ```json
+    { "error": { "code": "SECTION_NOT_FOUND", "message": "..." } }
+    ```
+
+  - `Cache-Control` is `no-store` in development and
+    `public, max-age=300, stale-while-revalidate=60` in production.
+
+  ## Section identifiers
+
+  URLs are kebab-case; the content contract is camelCase. The mapping lives in
+  the `SectionSlug` enum and a `Record<SectionSlug, SectionKey>` lookup, so
+  adding a slug without mapping it — or mapping one to a key that is not on
+  `HomeContent` — is a compile error rather than a runtime 404.
+
+  ## Image paths
+
+  `src` values such as `/images/home/hero.webp` are paths the **frontend**
+  serves from its `public/` directory. The API references assets; it does not
+  host them. This keeps images on the CDN and visible even when the API is
+  slow or cold.
+}

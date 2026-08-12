@@ -1,0 +1,39 @@
+meta {
+  name: Unknown Section
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/home/xyz
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 404
+  res.body.error.code: eq SECTION_NOT_FOUND
+  res.body.error.message: contains Known sections
+}
+
+docs {
+  # Unknown Section — 404
+  
+  A slug that is not a known section key:
+  
+  ```json
+  {
+    "error": {
+      "code": "SECTION_NOT_FOUND",
+      "message": "Unknown section 'nonsense'. Known sections: hero, trusted-by, about, solutions, pillar-detail, product-showcase, tech-stack."
+    }
+  }
+  ```
+  
+  The message enumerates the valid slugs, so a client that gets this can
+  recover without a second call to **List Sections**.
+  
+  Worth exercising: this is the path that proves error handling works
+  end to end — thrown in the controller, formatted by a single error
+  middleware, never leaking internals.
+}

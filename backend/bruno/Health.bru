@@ -1,0 +1,27 @@
+meta {
+  name: Health
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/health
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 200
+  res.body.status: eq ok
+  res.body.uptime: isNumber
+}
+
+docs {
+  # Health
+
+  Liveness probe. Returns `{ "status": "ok", "uptime": <seconds> }`.
+
+  Useful for warming a sleeping host before the page loads, and as the first
+  thing to check when the frontend reports a network error — if this fails,
+  the API is down rather than the request being wrong.
+}

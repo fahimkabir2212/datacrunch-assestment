@@ -1,0 +1,29 @@
+meta {
+  name: Trusted By
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/api/home/trusted-by
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 200
+  res.body.heading: isArray
+  res.body.logos: isArray
+  res.body.logos: length 8
+}
+
+docs {
+  # Trusted By
+
+  `GET /api/home/trusted-by` → the `trustedBy` slice of `HomeContent`.
+
+  Client logo wall. Eight entries; Alteryx and UiPath each appear twice, which is why every logo carries an explicit `id` rather than being keyed by name.
+
+  Returns the section payload directly, unwrapped — so the client type is just
+  the section interface, with no envelope to peel off.
+}
