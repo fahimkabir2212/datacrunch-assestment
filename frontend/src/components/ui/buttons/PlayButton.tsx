@@ -12,7 +12,7 @@ export default function PlayButton({
       type="button"
       onClick={onClick}
       aria-label="Play demo video"
-      className={`block relative size-24 rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand ${className}`.trim()}
+      className={`block relative size-24 cursor-pointer rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand ${className}`.trim()}
     >
       {/* layer 1 — outer ring, the only layer that animates */}
       <span
