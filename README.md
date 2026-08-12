@@ -101,20 +101,17 @@ one to use for Lighthouse runs or for checking the built output.
 Frontend and API deploy as a **single Vercel project**, so both share one
 origin. That means no CORS configuration and one URL.
 
-`vercel.json` drives everything:
+`vercel.json` declares the two halves as services and routes between them:
 
-- `installCommand` — `npm run install:all`, so the backend's dependencies exist
-- `buildCommand` — `npm run build`, which compiles `backend/dist` (needed by the
-  serverless function) and `frontend/dist`
-- `outputDirectory` — `frontend/dist`, served as static assets
-- `rewrites` — sends everything except `/api/*` to `index.html`, without which
-  a refresh on any client route would 404 at the CDN before React Router runs
+- `services.frontend` — root `frontend`, built with the Vite preset
+- `services.backend` — root `backend`, built with `npm run build` and served
+  with `npm start`; the port comes from `process.env.PORT`, which `config/env.ts`
+  already reads
+- `rewrites` — `/api/*` goes to the backend service, everything else to the
+  frontend
 
-`api/[...path].mjs` is the API. The catch-all filename keeps the original URL
-intact, so Express still receives `/api/home/hero` and the existing
-`app.use("/api", …)` mounting works unchanged. It imports the compiled
-`backend/dist/app.js` — not `index.ts`, which calls `app.listen()` and must
-never run in a serverless runtime.
+Neither package needed code changes to deploy: the backend runs exactly as it
+does locally, and the frontend calls the API on the same origin.
 
 ### Environment variables
 
@@ -128,8 +125,14 @@ the cached `Cache-Control` header.
 
 ### After deploying
 
-Check `/api/health` returns `{"success":true,…}`, then load the site and
-confirm the sections render rather than showing their error states.
+1. `/api/health` should return `{"success":true,…}` — confirms the backend
+   service is up and the `/api` rewrite reaches it.
+2. The home page should render content rather than section error states —
+   confirms the frontend is reaching the API on the same origin.
+3. Load a URL that does not exist, e.g. `/does-not-exist`, and refresh it. It
+   should show the styled 404 page. Vercel's own 404 instead means the frontend
+   service is not falling back to `index.html`, and the SPA needs an explicit
+   rewrite to `/index.html` for unmatched paths.
 
 ---
 
