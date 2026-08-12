@@ -16,6 +16,11 @@ export const homeContent: HomeContent = {
         alt: "A diverse team smiling together, encircled by a glowing network of connected data points",
       },
     },
+    video: {
+      provider: "youtube",
+      id: "jX4dLxiso6A",
+      title: "MetaTech product demo",
+    },
   },
 
   trustedBy: {

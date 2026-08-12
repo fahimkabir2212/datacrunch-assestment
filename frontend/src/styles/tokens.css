@@ -58,6 +58,29 @@
 
   --animate-marquee-left: marquee-left 60s linear infinite;
   --animate-marquee-right: marquee-right 60s linear infinite;
+
+  --animate-modal-in: modal-in 200ms ease-out;
+  --animate-fade-in: fade-in 200ms ease-out;
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes pulse-ring {
@@ -72,11 +95,6 @@
   }
 }
 
-/* Distance travelled per loop is 1/N of the track's total width, where N
-   is how many identical copies of the row are rendered (set via the
-   --marquee-reps custom property on the animated element, defaulting to
-   2 if unset). This must always be exactly one copy's width — anything
-   else creates a visible jump right as the loop restarts. */
 @keyframes marquee-left {
   from {
     transform: translateX(0);

@@ -64,6 +64,14 @@ export interface TechStackContent {
   items: TechStackItem[];
 }
 
+/** The demo video behind the hero's play button. */
+export interface HeroVideo {
+  provider: "youtube";
+  /** Provider-side id, not a full URL — the client builds the embed. */
+  id: string;
+  title: string;
+}
+
 export interface HeroContent {
   headline: HighlightedTextSegment[];
   description: string;
@@ -74,6 +82,7 @@ export interface HeroContent {
       alt: string;
     };
   };
+  video: HeroVideo;
 }
 
 export interface FooterLink {
