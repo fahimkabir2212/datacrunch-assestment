@@ -1,20 +1,34 @@
 import Container from "../../../ui/Container";
-import { productShowcaseContent } from "../../../../data/home/productShowcaseContent";
+import ProductShowcaseSkeleton from "./ProductShowcaseSkeleton";
+import SectionError from "../../../feedback/SectionError";
+import { useSection } from "../../../../hooks/useSection";
+import { SECTION_SLUGS } from "../../../../constants/sections";
+import type { ProductShowcaseContent } from "../../../../types/content";
 
 export default function ProductShowcase() {
-  const { logo, heading, description, cta, image } = productShowcaseContent;
+  const { status, data, error, retry } = useSection<ProductShowcaseContent>(
+    SECTION_SLUGS.productShowcase,
+  );
+
+  if (status === "loading") return <ProductShowcaseSkeleton />;
+
+  if (status === "error") {
+    return <SectionError label="Showcase" error={error} onRetry={retry} />;
+  }
+
+  const { logo, heading, description, cta, image } = data;
 
   return (
     <section id="product-showcase" className="scroll-mt-24 bg-surface-brand">
-      <Container className="grid grid-cols-1 gap-8 md:gap-16 py-16 md:grid-cols-2">
+      <Container className="grid grid-cols-1 gap-8 py-16 md:grid-cols-2 md:gap-16">
         <div className="flex flex-col justify-between gap-16">
           <img src={logo.src} alt={logo.alt} className="w-48 md:w-56" />
 
           <div>
-            <h3 className="text-3xl font-bold text-ink-inverse md:text-5xl max-w-lg">
+            <h3 className="max-w-lg text-3xl font-bold text-ink-inverse md:text-5xl">
               {heading}
             </h3>
-            <p className="mt-3 text-ink-inverse text-sm md:text-lg">
+            <p className="mt-3 text-sm text-ink-inverse md:text-lg">
               {description}
             </p>
             <button

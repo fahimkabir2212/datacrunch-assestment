@@ -1,18 +1,45 @@
 import Container from "../../../ui/Container";
 import Eyebrow from "../../../ui/Eyebrow";
-import { techStackContent } from "../../../../data/home/techStackContent";
 import TechStackRow from "./TechStackRow";
+import TechStackSkeleton from "./TechStackSkeleton";
+import SectionError from "../../../feedback/SectionError";
+import { useSection } from "../../../../hooks/useSection";
+import { SECTION_SLUGS } from "../../../../constants/sections";
+import type {
+  TechStackContent,
+  TechStackItem,
+} from "../../../../types/content";
 
 const ROW_SIZE = 6;
 
-export default function TechStack() {
-  const { eyebrow, heading, description, items } = techStackContent;
+function toRows(items: TechStackItem[]): TechStackItem[][] {
+  const rows: TechStackItem[][] = [];
+  for (let start = 0; start < items.length; start += ROW_SIZE) {
+    rows.push(items.slice(start, start + ROW_SIZE));
+  }
+  return rows;
+}
 
-  const rows = [
-    items.slice(0, ROW_SIZE),
-    items.slice(ROW_SIZE, ROW_SIZE * 2),
-    items.slice(ROW_SIZE * 2, ROW_SIZE * 3),
-  ];
+export default function TechStack() {
+  const { status, data, error, retry } = useSection<TechStackContent>(
+    SECTION_SLUGS.techStack,
+  );
+
+  if (status === "loading") return <TechStackSkeleton />;
+
+  if (status === "error") {
+    return (
+      <SectionError
+        label="Tech Stacks"
+        error={error}
+        onRetry={retry}
+        tone="light"
+      />
+    );
+  }
+
+  const { eyebrow, heading, description, items } = data;
+  const rows = toRows(items);
 
   return (
     <section id="tech-stack" className="scroll-mt-24 bg-surface">
@@ -29,7 +56,7 @@ export default function TechStack() {
           <TechStackRow
             key={index}
             items={row}
-            reverse={index === 1 /* middle row */}
+            reverse={index % 2 === 1 /* alternate direction */}
           />
         ))}
       </div>
