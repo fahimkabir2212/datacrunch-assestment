@@ -51,7 +51,19 @@ This starts both servers concurrently:
 - Frontend — http://localhost:5173
 - API — http://localhost:5000
 
-Each can also be run on its own with `npm run dev:frontend` / `npm run dev:backend`.
+#### Running one side on its own
+
+```bash
+npm run dev:frontend    # Vite only
+npm run dev:backend     # API only
+```
+
+Either can also be run from inside its own package with `npm run dev`.
+
+The frontend expects the API to be reachable at `VITE_API_BASE_URL`. Started on
+its own with no API running, the page still renders — every section falls back
+to its error state with a retry button, which is the intended behaviour rather
+than a broken build.
 
 ### 4. Build
 
@@ -60,7 +72,27 @@ npm run build
 ```
 
 Compiles the backend to `backend/dist` and the frontend to `frontend/dist`.
-Serve the built API with `npm start --prefix backend`.
+
+```bash
+npm start --prefix backend        # serve the compiled API
+npm run preview --prefix frontend # serve the built frontend locally
+```
+
+`preview` serves the production bundle rather than the dev server, so it is the
+one to use for Lighthouse runs or for checking the built output.
+
+### Scripts
+
+| Script            | Where             | Purpose                                  |
+| ----------------- | ----------------- | ---------------------------------------- |
+| `install:all`     | root              | Install all three package trees          |
+| `dev`             | root              | Run frontend and API together            |
+| `dev:frontend`    | root              | Vite dev server only                     |
+| `dev:backend`     | root              | API in watch mode only                   |
+| `build`           | root              | Build backend then frontend              |
+| `start`           | backend           | Run the compiled API from `dist`         |
+| `preview`         | frontend          | Serve the production build               |
+| `lint`            | frontend          | ESLint over the package                  |
 
 ---
 
