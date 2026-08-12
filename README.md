@@ -230,6 +230,28 @@ to its trigger. The video modal is a native `<dialog>`, which brings focus
 trapping, Escape handling, and top-layer stacking from the platform. Marquees
 and animations are gated behind `motion-safe` / `motion-reduce`.
 
+**Cross-browser compatibility.** The page was built against Chrome but
+verified on real iOS Safari, which surfaced two engine-specific issues fixed
+during development rather than just Chrome-checked and shipped:
+
+- `PlayButton`'s solid core was an SVG `<circle>` positioned with `inset-*`
+  alone. An `<svg>` with no explicit `width`/`height` is a replaced element
+  with an intrinsic ratio (300×150 by default); sizing it purely via `inset`
+  on all four sides is an over-constrained case that Chrome resolves by
+  stretching to fill, but Safari resolved by keeping the intrinsic ratio
+  instead — rendering the core small and off-center from the two ring
+  `<span>`s around it. Fixed by making the core a plain `<span>` (not a
+  replaced element, no ambiguity) and giving the remaining icon-only `<svg>`
+  explicit `width="100%" height="100%"` so it can't fall back to that ratio
+  either.
+- `PillarCard`'s title/description reveal relied entirely on
+  `:hover`/`group-hover`, which has no touch equivalent — and on iOS Safari a
+  tap can leave `:hover` applied ("sticky hover") until something else is
+  tapped, rather than just doing nothing. Scoped the hover-only interaction to
+  `md:` and up, where a pointer is the norm, and made the revealed layout
+  (title, description, background) the default below that, so the content
+  isn't gated behind an interaction some devices can't perform.
+
 ---
 
 ## Assumptions made
@@ -248,9 +270,6 @@ and animations are gated behind `motion-safe` / `motion-reduce`.
   no page furniture to wrap. It keeps a "back to home" link as the way out.
 - **CTA buttons are presentational.** The design supplies no destinations for
   "Book for Demo" and similar, so they render as real buttons without handlers.
-- **Mega-menu preview images are placeholders** drawn from existing assets; the
-  Figma exports were not part of the handoff. Swapping them is a data change in
-  `backend/src/data/site.ts`.
 - **Nav links point at on-page anchors**, since no other routes exist yet.
 
 ## Future improvements

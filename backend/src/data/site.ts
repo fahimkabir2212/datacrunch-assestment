@@ -14,8 +14,8 @@ export const siteContent: SiteContent = {
             label: "Custom Software Development",
             href: "#product-showcase",
             image: {
-              src: "/images/home/products/amlcredible-ui.webp",
-              alt: "A laptop displaying a custom software dashboard",
+              src: "/images/nav/custom-software-dev.webp",
+              alt: "An open laptop surrounded by floating code panels and language badges like PHP, CSS, and Java",
             },
           },
           {
@@ -23,8 +23,8 @@ export const siteContent: SiteContent = {
             label: "Data+AI First Innovation",
             href: "#pillar-detail",
             image: {
-              src: "/images/home/hero.webp",
-              alt: "A network of connected data points spanning a world map",
+              src: "/images/nav/data-ai-first.webp",
+              alt: "A hand reaching toward a glowing digital globe made of connected data points",
             },
           },
           {
@@ -32,8 +32,8 @@ export const siteContent: SiteContent = {
             label: "Tech Staff Augmentation",
             href: "#tech-stack",
             image: {
-              src: "/images/home/hero.webp",
-              alt: "Engineers connected across a distributed network",
+              src: "/images/nav/tech-staff.webp",
+              alt: "Networked profile icons rising from a connected mesh, representing a distributed talent pool",
             },
           },
         ],
